@@ -1,0 +1,578 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(35, 35, 35);
+}
+
+/* Hamburger icon styles */
+.hamburger {
+  display: none; /* Hidden by default, shown on mobile */
+  font-size: 1.5rem;
+  color: whitesmoke;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Sidebar styles for mobile */
+.nav-sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Hidden off-screen */
+  width: 80%;
+  max-width: 250px;
+  height: 100%;
+  background: rgb(25, 25, 25);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  transition: left 0.3s ease;
+  z-index: 1001;
+}
+
+/* Show sidebar when active */
+.nav-sidebar.active {
+  left: 0;
+}
+
+/* Close button for sidebar */
+.nav-close {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  color: whitesmoke;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;
+  --navbar-opacity: 0;
+  background: rgba(200, 240, 255, var(--navbar-opacity));
+  backdrop-filter: blur(0px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.nav-links a:hover {
+  color: hsla(136, 100%, 50%, 0.671);
+}
+
+.icons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  color: #333;
+  font-size: 1.8rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgb(25, 25, 25);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(222, 218, 218, 0.2);
+  min-width: 200px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #dccfcf;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.dropdown-menu a:hover {
+  background-color: #802525;
+}
+
+/* Section 1 CSS */
+
+.section1 {
+  width: 100%;
+  height: 23rem;
+  background-color: rgb(35, 35, 35);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-top: 5rem;
+  color: #b64341c4;
+  padding: 0 2rem;
+}
+
+.salad-image {
+  width: 20%;
+  height: auto;
+  object-fit: cover;
+  margin-top: 7rem;
+}
+
+.H\&A {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.H\&A h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.H\&A div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.H\&A div a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.H\&A div a:hover {
+  color: hsla(136, 100%, 50%, 0.671);
+}
+
+.H\&A div {
+  color: #eaefef;
+}
+
+.pizza-image {
+  width: 25%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Section  2 CSS  */
+
+.section2 {
+  width: 100%;
+  height: 40.5rem;
+  background-color: rgb(25, 25, 25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.border-container {
+  margin: 10rem;
+  border: 0.5px solid rgb(66, 57, 57);
+  display: flex;
+  width: calc(100% - 10rem);
+  height: calc(100% - 10rem);
+}
+
+.left-column {
+  width: 30%;
+  background-color: rgb(25, 25, 25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.profile-image {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 2rem;
+  color: hsla(6, 89%, 25%, 0.967);
+  margin: 0;
+}
+
+.user-mobile {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.option-link {
+  font-size: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  background-color: rgb(50, 50, 50);
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  width: 80%;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.option-link:hover {
+  background-color: hsla(136, 100%, 50%, 0.671);
+  color: #fff;
+}
+
+.right-column {
+  width: 70%;
+  background-color: rgb(25, 25, 25);
+  color: rgb(137, 129, 129);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+/* Footer Section 3 CSS */
+
+.section3 {
+  width: 100%;
+  height: 15rem;
+  background-color: rgb(35, 35, 35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  flex-direction: column;
+}
+
+.section3 .social-icons {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.social-icons img {
+  width: 2rem;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.section3 .social-icons a {
+  color: #fff;
+  font-size: 0.5rem;
+  text-decoration: none;
+}
+
+.section3 .footer-text {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Mobile screens (up to 600px) */
+@media (max-width: 600px) {
+  .hamburger {
+    display: block; /* Show hamburger icon */
+  }
+
+  .nav-links,
+  .icons {
+    display: none; /* Hide nav-links and icons by default */
+  }
+
+  .nav-sidebar .nav-links,
+  .nav-sidebar .icons {
+    display: flex; /* Show in sidebar */
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links a {
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .icons {
+    gap: 0.8rem;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-toggle {
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    text-align: left;
+    color: whitesmoke;
+  }
+
+  .dropdown-menu {
+    position: static; /* Stack naturally in sidebar */
+    width: 100%;
+    background: rgba(50, 50, 50, 0.9); /* Contrast for hierarchy */
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .dropdown-menu a {
+    font-size: 0.9rem;
+    padding: 0.4rem 1.5rem; /* Indent for hierarchy */
+  }
+
+  .navbar {
+    height: 4rem;
+    padding: 0 1rem;
+  }
+
+  .logo img {
+    height: 30px; /* Smaller logo */
+  }
+
+  .section1 {
+    margin-top: 4rem;
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .salad-image,
+  .pizza-image {
+    width: 80%;
+    margin: 1rem 0;
+  }
+
+  .H\&A h1 {
+    font-size: 1.5rem;
+  }
+
+  .H\&A div {
+    font-size: 0.8rem;
+    gap: 0.3rem;
+  }
+
+  .section2 {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .border-container {
+    flex-direction: column;
+    margin: 2rem;
+    width: calc(100% - 4rem);
+    height: auto;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .profile-image {
+    width: 40%;
+  }
+
+  .user-name {
+    font-size: 1.2rem;
+  }
+
+  .user-mobile {
+    font-size: 0.8rem;
+  }
+
+  .option-link {
+    font-size: 1rem;
+    width: 90%;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .right-column {
+    font-size: 0.9rem;
+  }
+
+  .section3 {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .social-icons img {
+    width: 1.2rem;
+  }
+
+  .section3 .social-icons a {
+    font-size: 0.4rem;
+  }
+
+  .section3 .footer-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet screens (601px to 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .navbar {
+    height: 4.5rem;
+    padding: 0 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .logo img {
+    height: 35px;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+
+  .icons {
+    gap: 1rem;
+  }
+
+  .dropdown-toggle {
+    font-size: 1.6rem;
+    color: whitesmoke;
+  }
+
+  .dropdown-menu {
+    min-width: 160px;
+    right: -10px;
+  }
+
+  .dropdown-menu a {
+    font-size: 1.3rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .section1 {
+    height: 20rem;
+    padding: 0 1.5rem;
+    margin-top: 4.5rem;
+  }
+
+  .salad-image,
+  .pizza-image {
+    width: 30%;
+  }
+
+  .H\&A h1 {
+    font-size: 2.5rem;
+  }
+
+  .H\&A div {
+    font-size: 1.1rem;
+    gap: 0.3rem;
+  }
+
+  .section2 {
+    height: 38rem;
+  }
+
+  .border-container {
+    margin: 7rem;
+    width: calc(100% - 7rem);
+    height: calc(100% - 7rem);
+  }
+
+  .left-column {
+    width: 40%;
+  }
+
+  .right-column {
+    width: 60%;
+  }
+
+  .profile-image {
+    width: 55%;
+  }
+
+  .user-name {
+    font-size: 1.8rem;
+  }
+
+  .user-mobile {
+    font-size: 1rem;
+  }
+
+  .option-link {
+    font-size: 1.3rem;
+    width: 85%;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .right-column {
+    font-size: 1.1rem;
+  }
+
+  .section3 {
+    height: 13rem;
+  }
+
+  .social-icons img {
+    width: 1.8rem;
+  }
+
+  .section3 .social-icons a {
+    font-size: 0.4rem;
+  }
+
+  .section3 .footer-text {
+    font-size: 1.1rem;
+  }
+}

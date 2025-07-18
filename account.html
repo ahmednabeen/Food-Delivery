@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="account.css" />
+    <title>Account page</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img
+            src="images/logo.png"
+            alt="Food Delivery Logo"
+            style="height: 40px"
+          />
+        </a>
+      </div>
+      <div class="hamburger">☰</div>
+      <div class="nav-sidebar">
+        <div class="nav-close">✕</div>
+        <div class="nav-links">
+          <a href="index.html">Browse Food</a>
+          <a href="#">Download App</a>
+          <a href="#">About Us</a>
+        </div>
+        <div class="icons">
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle">🛍️</a>
+            <div class="dropdown-menu">
+              <a href="#">View Cart</a>
+              <a href="#">Checkout</a>
+              <a href="#">Order History</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle">👤</a>
+            <div class="dropdown-menu">
+              <a href="login.html">Login</a>
+              <a href="register.html">Register</a>
+              <a href="account.html">Account</a>
+              <a href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#browse">Browse Food</a>
+        <a href="index.html#download">Download App</a>
+        <a href="index.html#about">About Us</a>
+      </div>
+      <div class="icons">
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">🛍️</a>
+          <div class="dropdown-menu">
+            <a href="#">View Cart</a>
+            <a href="#">Checkout</a>
+            <a href="#">Order History</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">👤</a>
+          <div class="dropdown-menu">
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="account.html">Account</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Section 1  -->
+
+    <div class="section1">
+      <img src="images/salad.png" alt="salad" class="salad-image" />
+      <div class="H&A">
+        <h1>User Profile</h1>
+        <div><a href="#">Home</a> /<a href="#">Account</a></div>
+      </div>
+      <img src="images/pizza.png" alt="pizza" class="pizza-image" />
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section2">
+      <div class="border-container">
+        <div class="left-column">
+          <img
+            src="images/burak.jpg"
+            alt="Profile Image"
+            class="profile-image"
+          />
+          <p class="user-name"><b>Burak Deniz</b></p>
+          <p class="user-mobile">+1234567890</p>
+          <a href="#" class="option-link">Account</a>
+          <a href="#" class="option-link">My Orders</a>
+          <a href="#" class="option-link">Logout</a>
+        </div>
+        <div class="right-column">
+          <p>
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a more-or-less normal
+            distribution of letters, as opposed to using 'Content here, content
+            here', making it look like readable English. Many desktop publishing
+            packages and web page editors now use Lorem Ipsum as their default
+            model text, and a search for 'lorem ipsum' will uncover many web
+            sites still in their infancy. Various versions have evolved over the
+            years, sometimes by accident, sometimes on purpose (injected humour
+            and the like).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section 3 -->
+
+    <div class="section3">
+      <div class="social-icons">
+        <a href="#"><img src="images/facebook.jpg" alt="Facebook" /></a>
+        <a href="#"><img src="images/twitter.jpg" alt="Twitter" /></a>
+        <a href="#"><img src="images/google+.jpg" alt="Google+" /></a>
+        <a href="#"><img src="images/linkdin.jpg" alt="LinkedIn" /></a>
+        <a href="#"><img src="images/instagram.avif" alt="instagram" /></a>
+      </div>
+      <div class="footer-text">
+        © 2020 MegaOne. Made With Love By Themesindustry
+      </div>
+    </div>
+
+    <!-- Java Script Section  -->
+    <script>
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.add("active");
+      });
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="browse.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Browse page</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Food Delivery Logo" />
+        </a>
+      </div>
+      <div class="hamburger" role="button" aria-label="Open navigation menu">
+        ☰
+      </div>
+      <div class="nav-sidebar">
+        <div class="nav-close" role="button" aria-label="Close navigation menu">
+          ✕
+        </div>
+        <div class="nav-links">
+          <a href="#">Browse Food</a>
+          <a href="#">Download App</a>
+          <a href="#">About Us</a>
+        </div>
+        <div class="icons">
+          <div class="navbar-dropdown">
+            <a href="#" class="dropdown-toggle">🛍️</a>
+            <div class="navbar-dropdown-menu">
+              <a href="#">View Cart</a>
+              <a href="#">Checkout</a>
+              <a href="#">Order History</a>
+            </div>
+          </div>
+          <div class="navbar-dropdown">
+            <a href="#" class="dropdown-toggle">👤</a>
+            <div class="navbar-dropdown-menu">
+              <a href="login.html">Login</a>
+              <a href="register.html">Register</a>
+              <a href="account.html">Account</a>
+              <a href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-links desktop-nav">
+        <a href="index.html#browse">Browse Food</a>
+        <a href="index.html#download">Download App</a>
+        <a href="index.html#about">About Us</a>
+      </div>
+      <div class="icons desktop-nav">
+        <div class="navbar-dropdown">
+          <a href="#" class="dropdown-toggle">🛍️</a>
+          <div class="navbar-dropdown-menu">
+            <a href="#">View Cart</a>
+            <a href="#">Checkout</a>
+            <a href="#">Order History</a>
+          </div>
+        </div>
+        <div class="navbar-dropdown">
+          <a href="#" class="dropdown-toggle">👤</a>
+          <div class="navbar-dropdown-menu">
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="account.html">Account</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Section 1 -->
+    <div class="section1">
+      <img src="images/salad.png" alt="Salad" class="salad-image" />
+      <div class="H-and-A">
+        <h1>Browse Our Food</h1>
+        <div class="breadcrumb">
+          <a href="#">Home</a> / <a href="#">Restaurant Listing</a>
+        </div>
+      </div>
+      <img src="images/pizza.png" alt="Pizza" class="pizza-image" />
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section2">
+      <div class="filter-container">
+        <div class="filter-bar">
+          <!-- Price Range Slider -->
+          <div class="price-filter">
+            <div class="price-range">
+              <input
+                type="range"
+                id="price-min"
+                min="0"
+                max="800"
+                value="0"
+                class="slider"
+                aria-label="Minimum price"
+                aria-valuenow="0"
+              />
+              <input
+                type="range"
+                id="price-max"
+                min="0"
+                max="800"
+                value="800"
+                class="slider"
+                aria-label="Maximum price"
+                aria-valuenow="800"
+              />
+            </div>
+            <div class="price-label">Price: $0 - $800</div>
+          </div>
+
+          <!-- Restaurant Type Dropdown -->
+          <div class="dropdown-container">
+            <div class="filter-dropdown">
+              <div class="dropdown-header">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                  <path d="M7 2v20" />
+                  <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z" />
+                </svg>
+                <span>Restaurant Type</span>
+                <svg
+                  class="arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+              </div>
+              <div class="filter-dropdown-menu">
+                <div class="dropdown-item">Italian</div>
+                <div class="dropdown-item">Chinese</div>
+                <div class="dropdown-item">Mexican</div>
+                <div class="dropdown-item">Indian</div>
+                <div class="dropdown-item">American</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Restaurant Location Dropdown -->
+          <div class="dropdown-container">
+            <div class="filter-dropdown">
+              <div class="dropdown-header">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Restaurant Location</span>
+                <svg
+                  class="arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+              </div>
+              <div class="filter-dropdown-menu">
+                <div class="dropdown-item">Downtown</div>
+                <div class="dropdown-item">Uptown</div>
+                <div class="dropdown-item">Midtown</div>
+                <div class="dropdown-item">Suburbs</div>
+                <div class="dropdown-item">Waterfront</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Button -->
+          <button class="filter-button">FILTER</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section More Food -->
+
+    <div class="more-food">
+      <div class="food-container">
+        <div class="food-item">
+          <a href="eat-frio.html"
+            ><img src="images/frio.png" alt="Eat Frio"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">25 mins</span>
+            <h3>Eat Frio</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="turkish-cuisine.html"
+            ><img src="images/cousine.png" alt="Turkish Cuisine"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">50 mins</span>
+            <h3>Turkish Cuisine</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="pizzario.html"
+            ><img src="images/pizzario.png" alt="Pizzario"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">45 mins</span>
+            <h3>Pizzario</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="pizzario.html"
+            ><img src="images/pizzario.png" alt="Pizzario"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">45 mins</span>
+            <h3>Pizzario</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="turkish-cuisine.html"
+            ><img src="images/cousine.png" alt="Turkish Cuisine"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">50 mins</span>
+            <h3>Turkish Cuisine</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="eat-frio.html"
+            ><img src="images/frio.png" alt="Eat Frio"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">25 mins</span>
+            <h3>Eat Frio</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="turkish-cuisine.html"
+            ><img src="images/cousine.png" alt="Turkish Cuisine"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">50 mins</span>
+            <h3>Turkish Cuisine</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="pizzario.html"
+            ><img src="images/pizzario.png" alt="Pizzario"
+          /></a>
+          <div class="food-details">
+            <span class="delivery-time">45 mins</span>
+            <h3>Pizzario</h3>
+            <p>Curabitur mollis bibendum luctus...</p>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+      </div>
+      <button class="load-more">LOAD MORE FOOD OPTIONS</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loadMoreButton = document.querySelector(".load-more");
+        const foodContainer = document.querySelector(".food-container");
+
+        // Define total number of food items available (11 items: 3 initial + 8 more)
+        const totalFoodItems = 11;
+        let loadedItems = 3; // Initial number of items
+        let clickCount = 0; // Track number of clicks
+
+        // Array of additional food items to load (8 items to support 3 clicks: 6 + 2)
+        const newFoodItems = [
+          {
+            imgSrc: "images/frio.png",
+            altText: "Sushi Delight",
+            time: "30 mins",
+            title: "Sushi Delight",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "sushi-delight.html",
+          },
+          {
+            imgSrc: "images/cousine.png",
+            altText: "Burger Haven",
+            time: "20 mins",
+            title: "Burger Haven",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "burger-haven.html",
+          },
+          {
+            imgSrc: "images/pizza.png",
+            altText: "Pasta Palace",
+            time: "40 mins",
+            title: "Pasta Palace",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "pasta-palace.html",
+          },
+          {
+            imgSrc: "images/frio.png",
+            altText: "Salad Fresh",
+            time: "25 mins",
+            title: "Salad Fresh",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "salad-fresh.html",
+          },
+          {
+            imgSrc: "images/cousine.png",
+            altText: "Steak House",
+            time: "50 mins",
+            title: "Steak House",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "steak-house.html",
+          },
+          {
+            imgSrc: "images/pizza.png",
+            altText: "Taco Fiesta",
+            time: "35 mins",
+            title: "Taco Fiesta",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "taco-fiesta.html",
+          },
+          {
+            imgSrc: "images/frio.png",
+            altText: "Ramen Bowl",
+            time: "30 mins",
+            title: "Ramen Bowl",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "ramen-bowl.html",
+          },
+          {
+            imgSrc: "images/cousine.png",
+            altText: "Curry Delight",
+            time: "45 mins",
+            title: "Curry Delight",
+            description: "Curabitur mollis bibendum luctus...",
+            rating: "★★★★☆",
+            link: "curry-delight.html",
+          },
+        ];
+
+        loadMoreButton.addEventListener("click", function () {
+          clickCount++; // Increment click count
+
+          let itemsToLoad;
+          if (clickCount === 1 || clickCount === 2) {
+            itemsToLoad = newFoodItems.slice(0, 3); // Load 3 items on 1st and 2nd clicks
+          } else if (clickCount === 3) {
+            itemsToLoad = newFoodItems.slice(0, 2); // Load 2 items on 3rd click
+          }
+
+          if (itemsToLoad && itemsToLoad.length > 0) {
+            itemsToLoad.forEach((item) => {
+              const foodItem = document.createElement("div");
+              foodItem.className = "food-item";
+              foodItem.innerHTML = `
+            <a href="${item.link}"><img src="${item.imgSrc}" alt="${item.altText}" /></a>
+            <div class="food-details">
+              <span class="delivery-time">${item.time}</span>
+              <h3>${item.title}</h3>
+              <p>${item.description}</p>
+              <div class="rating">${item.rating}</div>
+            </div>
+          `;
+              foodContainer.appendChild(foodItem);
+              loadedItems++;
+            });
+
+            // Remove loaded items from the array
+            newFoodItems.splice(0, itemsToLoad.length);
+          }
+
+          // Check if all items are loaded or 3rd click is reached with no more items
+          if (clickCount === 3 || loadedItems >= totalFoodItems) {
+            loadMoreButton.textContent = "NO MORE FOODS";
+            loadMoreButton.disabled = true;
+            loadMoreButton.classList.add("disabled");
+          }
+        });
+      });
+    </script>
+
+    <!-- Footer Section 3 -->
+    <div class="section3">
+      <div class="social-icons">
+        <a href="#"><img src="images/facebook.jpg" alt="Facebook" /></a>
+        <a href="#"><img src="images/twitter.jpg" alt="Twitter" /></a>
+        <a href="#"><img src="images/google+.jpg" alt="Google+" /></a>
+        <a href="#"><img src="images/linkdin.jpg" alt="LinkedIn" /></a>
+        <a href="#"><img src="images/instagram.avif" alt="Instagram" /></a>
+      </div>
+      <div class="footer-text">
+        © 2020 MegaOne. Made With Love By Themesindustry
+      </div>
+    </div>
+
+    <script>
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.add("active");
+      });
+
+      document.querySelector(".nav-close").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.remove("active");
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Price Range Slider Functionality
+        const priceMin = document.getElementById("price-min");
+        const priceMax = document.getElementById("price-max");
+        const priceLabel = document.querySelector(".price-label");
+
+        function updatePriceLabel() {
+          const minVal = parseInt(priceMin.value);
+          const maxVal = parseInt(priceMax.value);
+
+          if (minVal > maxVal) {
+            priceMin.value = maxVal;
+          }
+
+          if (maxVal < minVal) {
+            priceMax.value = minVal;
+          }
+
+          priceLabel.textContent = `Price: $${priceMin.value} - $${priceMax.value}`;
+          priceMin.setAttribute("aria-valuenow", priceMin.value);
+          priceMax.setAttribute("aria-valuenow", priceMax.value);
+        }
+
+        priceMin.addEventListener("input", updatePriceLabel);
+        priceMax.addEventListener("input", updatePriceLabel);
+        updatePriceLabel();
+
+        // Filter Dropdown Functionality
+        const filterDropdowns = document.querySelectorAll(".filter-dropdown");
+
+        filterDropdowns.forEach((dropdown) => {
+          const header = dropdown.querySelector(".dropdown-header");
+          const menu = dropdown.querySelector(".filter-dropdown-menu");
+          const items = dropdown.querySelectorAll(".dropdown-item");
+          const span = header.querySelector("span");
+
+          header.addEventListener("click", function (e) {
+            e.stopPropagation();
+            filterDropdowns.forEach((otherDropdown) => {
+              if (otherDropdown !== dropdown) {
+                otherDropdown.classList.remove("active");
+              }
+            });
+            dropdown.classList.toggle("active");
+          });
+
+          items.forEach((item) => {
+            item.addEventListener("click", function () {
+              span.textContent = item.textContent;
+              dropdown.classList.remove("active");
+            });
+          });
+        });
+
+        // Close filter dropdowns when clicking outside
+        document.addEventListener("click", function () {
+          filterDropdowns.forEach((dropdown) => {
+            dropdown.classList.remove("active");
+          });
+        });
+
+        // Filter Button Functionality
+        const filterButton = document.querySelector(".filter-button");
+
+        filterButton.addEventListener("click", function () {
+          const priceRange = `$${priceMin.value} - $${priceMax.value}`;
+          const restaurantType = document.querySelector(
+            ".filter-dropdown:nth-of-type(1) .dropdown-header span"
+          ).textContent;
+          const restaurantLocation = document.querySelector(
+            ".filter-dropdown:nth-of-type(2) .dropdown-header span"
+          ).textContent;
+
+          console.log("Filter applied:", {
+            priceRange,
+            restaurantType,
+            restaurantLocation,
+          });
+
+          filterButton.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            filterButton.style.transform = "";
+          }, 150);
+
+          alert(
+            `Filters applied:\nPrice: ${priceRange}\nType: ${restaurantType}\nLocation: ${restaurantLocation}`
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
