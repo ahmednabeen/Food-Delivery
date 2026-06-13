@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>View Cart</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="{% url 'index' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Food Delivery Logo" style="height: 40px" />
+        </a>
+      </div>
+      <div class="hamburger">☰</div>
+      <div class="nav-sidebar">
+        <div class="nav-close">✕</div>
+        <div class="nav-links">
+          <a href="{% url 'browse' %}">Browse Food</a>
+          <a href="{% url 'index' %}#download">Download App</a>
+          <a href="{% url 'index' %}#about">About Us</a>
+        </div>
+        <div class="icons">
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle">🛍️{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
+            <div class="dropdown-menu">
+              <a href="{% url 'view_cart' %}">View Cart</a>
+              <a href="{% url 'checkout' %}">Checkout</a>
+              <a href="{% url 'order_history' %}">Order History</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle">👤</a>
+            <div class="dropdown-menu">
+              <a href="{% url 'login' %}">Login</a>
+              <a href="{% url 'register' %}">Register</a>
+              <a href="{% url 'account' %}">Account</a>
+              <a href="{% url 'index' %}">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="{% url 'index' %}#browse">Browse Food</a>
+        <a href="{% url 'index' %}#download">Download App</a>
+        <a href="{% url 'index' %}#about">About Us</a>
+      </div>
+      <div class="icons">
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">🛍️{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
+          <div class="dropdown-menu">
+            <a href="{% url 'view_cart' %}">View Cart</a>
+            <a href="{% url 'checkout' %}">Checkout</a>
+            <a href="{% url 'order_history' %}">Order History</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">👤</a>
+          <div class="dropdown-menu">
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'account' %}">Account</a>
+            <a href="{% url 'index' %}">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="account-section1">
+      <img src="{% static 'images/salad.png' %}" alt="salad" class="salad-image" />
+      <div class="H&A">
+        <h1>Your Cart</h1>
+        <div><a href="{% url 'index' %}">Home</a> / <a href="{% url 'view_cart' %}">Cart</a></div>
+      </div>
+      <img src="{% static 'images/pizza.png' %}" alt="pizza" class="pizza-image" />
+    </div>
+
+    <div class="account-section2">
+      <div class="border-container">
+        {% if items %}
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td class="cart-item-info">
+                <img src="{% static 'images/'|add:item.image %}" alt="{{ item.name }}" class="cart-item-img" />
+                <span>{{ item.name }}</span>
+              </td>
+              <td>${{ item.price }}</td>
+              <td>
+                <form method="POST" action="{% url 'update_cart' slug=item.slug %}" class="cart-qty-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="dec" />
+                  <button type="submit" class="qty-btn">−</button>
+                </form>
+                <span class="qty-value">{{ item.qty }}</span>
+                <form method="POST" action="{% url 'update_cart' slug=item.slug %}" class="cart-qty-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="inc" />
+                  <button type="submit" class="qty-btn">+</button>
+                </form>
+              </td>
+              <td>${{ item.subtotal|floatformat:2 }}</td>
+              <td>
+                <form method="POST" action="{% url 'update_cart' slug=item.slug %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="remove" />
+                  <button type="submit" class="cart-remove-btn">✕</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="cart-total-row">
+          <strong>Total: ${{ total|floatformat:2 }}</strong>
+        </div>
+        <div class="cart-actions">
+          <a href="{% url 'browse' %}" class="option-link">Continue Shopping</a>
+          <a href="{% url 'checkout' %}" class="filter-button" style="min-width: auto">Proceed to Checkout</a>
+        </div>
+        {% else %}
+        <div class="cart-empty">
+          <p style="font-size: 1.5rem; color: #ccc">Your cart is empty.</p>
+          <a href="{% url 'browse' %}" class="option-link" style="margin-top: 2rem">Browse Food</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="section3">
+      <div class="social-icons">
+        <a href="#"><img src="{% static 'images/facebook.jpg' %}" alt="Facebook" /></a>
+        <a href="#"><img src="{% static 'images/twitter.jpg' %}" alt="Twitter" /></a>
+        <a href="#"><img src="{% static 'images/google-plus.jpg' %}" alt="Google+" /></a>
+        <a href="#"><img src="{% static 'images/linkdin.jpg' %}" alt="LinkedIn" /></a>
+        <a href="#"><img src="{% static 'images/instagram.avif' %}" alt="Instagram" /></a>
+      </div>
+      <div class="footer-text">© 2020 MegaOne. Made With Love By Themesindustry</div>
+    </div>
+
+    <script>
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.add("active");
+      });
+      document.querySelector(".nav-close").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.remove("active");
+      });
+    </script>
+  </body>
+</html>

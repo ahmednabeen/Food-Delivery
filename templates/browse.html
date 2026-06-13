@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="browse.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
       rel="stylesheet"
@@ -13,8 +14,8 @@
   <body>
     <nav class="navbar">
       <div class="logo">
-        <a href="index.html">
-          <img src="images/logo.png" alt="Food Delivery Logo" />
+        <a href="{% url 'index' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Food Delivery Logo" />
         </a>
       </div>
       <div class="hamburger" role="button" aria-label="Open navigation menu">
@@ -25,51 +26,51 @@
           ✕
         </div>
         <div class="nav-links">
-          <a href="#">Browse Food</a>
-          <a href="#">Download App</a>
-          <a href="#">About Us</a>
+          <a href="{% url 'browse' %}">Browse Food</a>
+          <a href="{% url 'index' %}#download">Download App</a>
+          <a href="{% url 'index' %}#about">About Us</a>
         </div>
         <div class="icons">
           <div class="navbar-dropdown">
-            <a href="#" class="dropdown-toggle">🛍️</a>
+            <a href="#" class="dropdown-toggle">🛍️{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
             <div class="navbar-dropdown-menu">
-              <a href="#">View Cart</a>
-              <a href="#">Checkout</a>
-              <a href="#">Order History</a>
+              <a href="{% url 'view_cart' %}">View Cart</a>
+              <a href="{% url 'checkout' %}">Checkout</a>
+              <a href="{% url 'order_history' %}">Order History</a>
             </div>
           </div>
           <div class="navbar-dropdown">
             <a href="#" class="dropdown-toggle">👤</a>
             <div class="navbar-dropdown-menu">
-              <a href="login.html">Login</a>
-              <a href="register.html">Register</a>
-              <a href="account.html">Account</a>
-              <a href="#">Logout</a>
+              <a href="{% url 'login' %}">Login</a>
+              <a href="{% url 'register' %}">Register</a>
+              <a href="{% url 'account' %}">Account</a>
+              <a href="{% url 'index' %}">Logout</a>
             </div>
           </div>
         </div>
       </div>
       <div class="nav-links desktop-nav">
-        <a href="index.html#browse">Browse Food</a>
-        <a href="index.html#download">Download App</a>
-        <a href="index.html#about">About Us</a>
+        <a href="{% url 'index' %}#browse">Browse Food</a>
+        <a href="{% url 'index' %}#download">Download App</a>
+        <a href="{% url 'index' %}#about">About Us</a>
       </div>
       <div class="icons desktop-nav">
         <div class="navbar-dropdown">
-          <a href="#" class="dropdown-toggle">🛍️</a>
+          <a href="#" class="dropdown-toggle">🛍️{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
           <div class="navbar-dropdown-menu">
-            <a href="#">View Cart</a>
-            <a href="#">Checkout</a>
-            <a href="#">Order History</a>
+            <a href="{% url 'view_cart' %}">View Cart</a>
+            <a href="{% url 'checkout' %}">Checkout</a>
+            <a href="{% url 'order_history' %}">Order History</a>
           </div>
         </div>
         <div class="navbar-dropdown">
           <a href="#" class="dropdown-toggle">👤</a>
           <div class="navbar-dropdown-menu">
-            <a href="login.html">Login</a>
-            <a href="register.html">Register</a>
-            <a href="account.html">Account</a>
-            <a href="#">Logout</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'account' %}">Account</a>
+            <a href="{% url 'index' %}">Logout</a>
           </div>
         </div>
       </div>
@@ -77,14 +78,14 @@
 
     <!-- Section 1 -->
     <div class="section1">
-      <img src="images/salad.png" alt="Salad" class="salad-image" />
+      <img src="{% static 'images/salad.png' %}" alt="Salad" class="salad-image" />
       <div class="H-and-A">
         <h1>Browse Our Food</h1>
         <div class="breadcrumb">
-          <a href="#">Home</a> / <a href="#">Restaurant Listing</a>
+          <a href="{% url 'index' %}">Home</a> / <a href="{% url 'browse' %}">Restaurant Listing</a>
         </div>
       </div>
-      <img src="images/pizza.png" alt="Pizza" class="pizza-image" />
+      <img src="{% static 'images/pizza.png' %}" alt="Pizza" class="pizza-image" />
     </div>
 
     <!-- Section 2 -->
@@ -94,28 +95,27 @@
           <!-- Price Range Slider -->
           <div class="price-filter">
             <div class="price-range">
+              <div class="price-track"></div>
               <input
                 type="range"
                 id="price-min"
                 min="0"
-                max="800"
+                max="50"
                 value="0"
                 class="slider"
                 aria-label="Minimum price"
-                aria-valuenow="0"
               />
               <input
                 type="range"
                 id="price-max"
                 min="0"
-                max="800"
-                value="800"
+                max="50"
+                value="50"
                 class="slider"
                 aria-label="Maximum price"
-                aria-valuenow="800"
               />
             </div>
-            <div class="price-label">Price: $0 - $800</div>
+            <div class="price-label">Price: $0 - $50</div>
           </div>
 
           <!-- Restaurant Type Dropdown -->
@@ -199,9 +199,9 @@
 
     <div class="more-food">
       <div class="food-container">
-        <div class="food-item">
-          <a href="eat-frio.html"
-            ><img src="images/frio.png" alt="Eat Frio"
+        <div class="food-item" data-price="12.99" data-category="Italian">
+          <a href="{% url 'food_detail' slug='eat-frio' %}"
+            ><img src="{% static 'images/frio.png' %}" alt="Eat Frio"
           /></a>
           <div class="food-details">
             <span class="delivery-time">25 mins</span>
@@ -210,9 +210,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="turkish-cuisine.html"
-            ><img src="images/cousine.png" alt="Turkish Cuisine"
+        <div class="food-item" data-price="18.99" data-category="Turkish">
+          <a href="{% url 'food_detail' slug='turkish-cuisine' %}"
+            ><img src="{% static 'images/cousine.png' %}" alt="Turkish Cuisine"
           /></a>
           <div class="food-details">
             <span class="delivery-time">50 mins</span>
@@ -221,9 +221,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="pizzario.html"
-            ><img src="images/pizzario.png" alt="Pizzario"
+        <div class="food-item" data-price="15.99" data-category="Italian">
+          <a href="{% url 'food_detail' slug='pizzario' %}"
+            ><img src="{% static 'images/pizzario.png' %}" alt="Pizzario"
           /></a>
           <div class="food-details">
             <span class="delivery-time">45 mins</span>
@@ -232,9 +232,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="pizzario.html"
-            ><img src="images/pizzario.png" alt="Pizzario"
+        <div class="food-item" data-price="15.99" data-category="Italian">
+          <a href="{% url 'food_detail' slug='pizzario' %}"
+            ><img src="{% static 'images/pizzario.png' %}" alt="Pizzario"
           /></a>
           <div class="food-details">
             <span class="delivery-time">45 mins</span>
@@ -243,9 +243,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="turkish-cuisine.html"
-            ><img src="images/cousine.png" alt="Turkish Cuisine"
+        <div class="food-item" data-price="18.99" data-category="Turkish">
+          <a href="{% url 'food_detail' slug='turkish-cuisine' %}"
+            ><img src="{% static 'images/cousine.png' %}" alt="Turkish Cuisine"
           /></a>
           <div class="food-details">
             <span class="delivery-time">50 mins</span>
@@ -254,9 +254,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="eat-frio.html"
-            ><img src="images/frio.png" alt="Eat Frio"
+        <div class="food-item" data-price="12.99" data-category="Italian">
+          <a href="{% url 'food_detail' slug='eat-frio' %}"
+            ><img src="{% static 'images/frio.png' %}" alt="Eat Frio"
           /></a>
           <div class="food-details">
             <span class="delivery-time">25 mins</span>
@@ -265,9 +265,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="turkish-cuisine.html"
-            ><img src="images/cousine.png" alt="Turkish Cuisine"
+        <div class="food-item" data-price="18.99" data-category="Turkish">
+          <a href="{% url 'food_detail' slug='turkish-cuisine' %}"
+            ><img src="{% static 'images/cousine.png' %}" alt="Turkish Cuisine"
           /></a>
           <div class="food-details">
             <span class="delivery-time">50 mins</span>
@@ -276,9 +276,9 @@
             <div class="rating">★★★★☆</div>
           </div>
         </div>
-        <div class="food-item">
-          <a href="pizzario.html"
-            ><img src="images/pizzario.png" alt="Pizzario"
+        <div class="food-item" data-price="15.99" data-category="Italian">
+          <a href="{% url 'food_detail' slug='pizzario' %}"
+            ><img src="{% static 'images/pizzario.png' %}" alt="Pizzario"
           /></a>
           <div class="food-details">
             <span class="delivery-time">45 mins</span>
@@ -288,109 +288,139 @@
           </div>
         </div>
       </div>
-      <button class="load-more">LOAD MORE FOOD OPTIONS</button>
+      <button class="load-more">LOAD MORE FOOD</button>
     </div>
 
     <script>
+      var staticUrl = "{% static '' %}";
       document.addEventListener("DOMContentLoaded", function () {
         const loadMoreButton = document.querySelector(".load-more");
         const foodContainer = document.querySelector(".food-container");
 
-        // Define total number of food items available (11 items: 3 initial + 8 more)
-        const totalFoodItems = 11;
-        let loadedItems = 3; // Initial number of items
-        let clickCount = 0; // Track number of clicks
-
-        // Array of additional food items to load (8 items to support 3 clicks: 6 + 2)
         const newFoodItems = [
           {
-            imgSrc: "images/frio.png",
+            imgSrc: staticUrl + "images/frio.png",
             altText: "Sushi Delight",
             time: "30 mins",
             title: "Sushi Delight",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "sushi-delight.html",
+            price: 22.99,
+            category: "Japanese",
+            link: "{% url 'food_detail' slug='sushi-delight' %}",
           },
           {
-            imgSrc: "images/cousine.png",
+            imgSrc: staticUrl + "images/cousine.png",
             altText: "Burger Haven",
             time: "20 mins",
             title: "Burger Haven",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "burger-haven.html",
+            price: 11.99,
+            category: "American",
+            link: "{% url 'food_detail' slug='burger-haven' %}",
           },
           {
-            imgSrc: "images/pizza.png",
+            imgSrc: staticUrl + "images/pizza.png",
             altText: "Pasta Palace",
             time: "40 mins",
             title: "Pasta Palace",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "pasta-palace.html",
+            price: 14.99,
+            category: "Italian",
+            link: "{% url 'food_detail' slug='pasta-palace' %}",
           },
           {
-            imgSrc: "images/frio.png",
+            imgSrc: staticUrl + "images/frio.png",
             altText: "Salad Fresh",
             time: "25 mins",
             title: "Salad Fresh",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "salad-fresh.html",
+            price: 9.99,
+            category: "Healthy",
+            link: "{% url 'food_detail' slug='salad-fresh' %}",
           },
           {
-            imgSrc: "images/cousine.png",
+            imgSrc: staticUrl + "images/cousine.png",
             altText: "Steak House",
             time: "50 mins",
             title: "Steak House",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "steak-house.html",
+            price: 29.99,
+            category: "American",
+            link: "{% url 'food_detail' slug='steak-house' %}",
           },
           {
-            imgSrc: "images/pizza.png",
+            imgSrc: staticUrl + "images/pizza.png",
             altText: "Taco Fiesta",
             time: "35 mins",
             title: "Taco Fiesta",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "taco-fiesta.html",
+            price: 10.99,
+            category: "Mexican",
+            link: "{% url 'food_detail' slug='taco-fiesta' %}",
           },
           {
-            imgSrc: "images/frio.png",
+            imgSrc: staticUrl + "images/frio.png",
             altText: "Ramen Bowl",
             time: "30 mins",
             title: "Ramen Bowl",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "ramen-bowl.html",
+            price: 13.99,
+            category: "Japanese",
+            link: "{% url 'food_detail' slug='ramen-bowl' %}",
           },
           {
-            imgSrc: "images/cousine.png",
+            imgSrc: staticUrl + "images/cousine.png",
             altText: "Curry Delight",
             time: "45 mins",
             title: "Curry Delight",
             description: "Curabitur mollis bibendum luctus...",
             rating: "★★★★☆",
-            link: "curry-delight.html",
+            price: 16.99,
+            category: "Indian",
+            link: "{% url 'food_detail' slug='curry-delight' %}",
           },
         ];
 
-        loadMoreButton.addEventListener("click", function () {
-          clickCount++; // Increment click count
+        function applyFiltersToItem(itemEl) {
+          const minVal = parseInt(priceMin.value);
+          const maxVal = parseInt(priceMax.value);
+          const typeSpan = document.querySelector(".filter-dropdown:nth-of-type(1) .dropdown-header span");
+          const locationSpan = document.querySelector(".filter-dropdown:nth-of-type(2) .dropdown-header span");
+          const selectedType = typeSpan.textContent;
+          const selectedLocation = locationSpan.textContent;
 
-          let itemsToLoad;
-          if (clickCount === 1 || clickCount === 2) {
-            itemsToLoad = newFoodItems.slice(0, 3); // Load 3 items on 1st and 2nd clicks
-          } else if (clickCount === 3) {
-            itemsToLoad = newFoodItems.slice(0, 2); // Load 2 items on 3rd click
+          const price = parseFloat(itemEl.dataset.price);
+          const category = itemEl.dataset.category;
+
+          let show = true;
+
+          if (price < minVal || price > maxVal) {
+            show = false;
           }
 
-          if (itemsToLoad && itemsToLoad.length > 0) {
+          if (selectedType !== "Restaurant Type" && category !== selectedType) {
+            show = false;
+          }
+
+          itemEl.style.display = show ? "" : "none";
+        }
+
+        loadMoreButton.addEventListener("click", function () {
+          const itemsToLoad = newFoodItems.splice(0, 4);
+
+          if (itemsToLoad.length > 0) {
             itemsToLoad.forEach((item) => {
               const foodItem = document.createElement("div");
               foodItem.className = "food-item";
+              foodItem.setAttribute("data-price", item.price);
+              foodItem.setAttribute("data-category", item.category);
               foodItem.innerHTML = `
             <a href="${item.link}"><img src="${item.imgSrc}" alt="${item.altText}" /></a>
             <div class="food-details">
@@ -401,15 +431,11 @@
             </div>
           `;
               foodContainer.appendChild(foodItem);
-              loadedItems++;
+              applyFiltersToItem(foodItem);
             });
-
-            // Remove loaded items from the array
-            newFoodItems.splice(0, itemsToLoad.length);
           }
 
-          // Check if all items are loaded or 3rd click is reached with no more items
-          if (clickCount === 3 || loadedItems >= totalFoodItems) {
+          if (newFoodItems.length === 0) {
             loadMoreButton.textContent = "NO MORE FOODS";
             loadMoreButton.disabled = true;
             loadMoreButton.classList.add("disabled");
@@ -421,11 +447,11 @@
     <!-- Footer Section 3 -->
     <div class="section3">
       <div class="social-icons">
-        <a href="#"><img src="images/facebook.jpg" alt="Facebook" /></a>
-        <a href="#"><img src="images/twitter.jpg" alt="Twitter" /></a>
-        <a href="#"><img src="images/google+.jpg" alt="Google+" /></a>
-        <a href="#"><img src="images/linkdin.jpg" alt="LinkedIn" /></a>
-        <a href="#"><img src="images/instagram.avif" alt="Instagram" /></a>
+        <a href="#"><img src="{% static 'images/facebook.jpg' %}" alt="Facebook" /></a>
+        <a href="#"><img src="{% static 'images/twitter.jpg' %}" alt="Twitter" /></a>
+        <a href="#"><img src="{% static 'images/google-plus.jpg' %}" alt="Google+" /></a>
+        <a href="#"><img src="{% static 'images/linkdin.jpg' %}" alt="LinkedIn" /></a>
+        <a href="#"><img src="{% static 'images/instagram.avif' %}" alt="Instagram" /></a>
       </div>
       <div class="footer-text">
         © 2020 MegaOne. Made With Love By Themesindustry
@@ -446,27 +472,36 @@
         const priceMin = document.getElementById("price-min");
         const priceMax = document.getElementById("price-max");
         const priceLabel = document.querySelector(".price-label");
+        const priceTrack = document.querySelector(".price-track");
 
-        function updatePriceLabel() {
-          const minVal = parseInt(priceMin.value);
-          const maxVal = parseInt(priceMax.value);
+        let activeSlider = null;
+
+        function updatePriceSlider() {
+          let minVal = parseInt(priceMin.value);
+          let maxVal = parseInt(priceMax.value);
+          const range = parseInt(priceMin.max) - parseInt(priceMin.min);
 
           if (minVal > maxVal) {
-            priceMin.value = maxVal;
+            if (activeSlider === "min") {
+              priceMin.value = maxVal;
+              minVal = maxVal;
+            } else {
+              priceMax.value = minVal;
+              maxVal = minVal;
+            }
           }
 
-          if (maxVal < minVal) {
-            priceMax.value = minVal;
-          }
+          const leftPct = ((minVal - parseInt(priceMin.min)) / range) * 100;
+          const rightPct = ((maxVal - parseInt(priceMin.min)) / range) * 100;
 
-          priceLabel.textContent = `Price: $${priceMin.value} - $${priceMax.value}`;
-          priceMin.setAttribute("aria-valuenow", priceMin.value);
-          priceMax.setAttribute("aria-valuenow", priceMax.value);
+          priceTrack.style.background = `linear-gradient(to right, #444 0%, #444 ${leftPct}%, #ff4757 ${leftPct}%, #ff4757 ${rightPct}%, #444 ${rightPct}%, #444 100%)`;
+
+          priceLabel.textContent = `Price: $${minVal} - $${maxVal}`;
         }
 
-        priceMin.addEventListener("input", updatePriceLabel);
-        priceMax.addEventListener("input", updatePriceLabel);
-        updatePriceLabel();
+        priceMin.addEventListener("input", function () { activeSlider = "min"; updatePriceSlider(); });
+        priceMax.addEventListener("input", function () { activeSlider = "max"; updatePriceSlider(); });
+        updatePriceSlider();
 
         // Filter Dropdown Functionality
         const filterDropdowns = document.querySelectorAll(".filter-dropdown");
@@ -506,28 +541,12 @@
         const filterButton = document.querySelector(".filter-button");
 
         filterButton.addEventListener("click", function () {
-          const priceRange = `$${priceMin.value} - $${priceMax.value}`;
-          const restaurantType = document.querySelector(
-            ".filter-dropdown:nth-of-type(1) .dropdown-header span"
-          ).textContent;
-          const restaurantLocation = document.querySelector(
-            ".filter-dropdown:nth-of-type(2) .dropdown-header span"
-          ).textContent;
-
-          console.log("Filter applied:", {
-            priceRange,
-            restaurantType,
-            restaurantLocation,
-          });
+          document.querySelectorAll(".food-item").forEach(applyFiltersToItem);
 
           filterButton.style.transform = "scale(0.95)";
           setTimeout(() => {
             filterButton.style.transform = "";
           }, 150);
-
-          alert(
-            `Filters applied:\nPrice: ${priceRange}\nType: ${restaurantType}\nLocation: ${restaurantLocation}`
-          );
         });
       });
     </script>

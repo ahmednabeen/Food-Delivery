@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body class="register-body">
+    <div class="register-container">
+      <div class="register-card register-left-card">
+        <div class="register-row-top">
+          <div class="register-logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="register-logo" />
+          </div>
+          <p style="color: brown">Lorem ipsum dolor sit amet</p>
+          <h1>Get more things, done with <br />Registration platform.</h1>
+          <p>
+            Access to the most powerful tool in the entire design <br />and web
+            industry.
+          </p>
+          <div class="register-link">
+            <input type="text" class="register-link-input-field" placeholder="Name" />
+            <input type="tel" class="register-link-input-field" placeholder="Mobile" />
+          </div>
+          <input type="email" class="register-input-field" placeholder="Email" />
+          <input type="password" class="register-input-field" placeholder="Password" />
+          <div class="register-button-container">
+            <button class="register-button"><b>REGISTER</b></button>
+            <a href="{% url 'login' %}" class="register-register-link"
+              >Already registered! Login here?</a
+            >
+          </div>
+        </div>
+        <div class="register-row-bottom">
+          <div class="register-link-container">
+            <div class="register-vertical-links">
+              <a href="{% url 'browse' %}" class="register-register-link">Browse Food</a>
+              <a href="{% url 'index' %}#download" class="register-register-link">Download App</a>
+            </div>
+            <a href="{% url 'index' %}#about" class="register-register-link" style="margin-top: 2rem"
+              >About Us</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="register-card register-right-card">
+        <img
+          src="https://megaone.acrothemes.com/food-delivery/img/reg-half-block.jpg"
+          alt="Food Delivery Image"
+        />
+      </div>
+    </div>
+  </body>
+</html>

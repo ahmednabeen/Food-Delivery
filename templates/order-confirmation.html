@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Order Confirmation</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="{% url 'index' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Food Delivery Logo" style="height: 40px" />
+        </a>
+      </div>
+      <div class="hamburger">☰</div>
+      <div class="nav-sidebar">
+        <div class="nav-close">✕</div>
+        <div class="nav-links">
+          <a href="{% url 'browse' %}">Browse Food</a>
+          <a href="{% url 'index' %}#download">Download App</a>
+          <a href="{% url 'index' %}#about">About Us</a>
+        </div>
+        <div class="icons">
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle">🛍️{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
+            <div class="dropdown-menu">
+              <a href="{% url 'view_cart' %}">View Cart</a>
+              <a href="{% url 'checkout' %}">Checkout</a>
+              <a href="{% url 'order_history' %}">Order History</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle">👤</a>
+            <div class="dropdown-menu">
+              <a href="{% url 'login' %}">Login</a>
+              <a href="{% url 'register' %}">Register</a>
+              <a href="{% url 'account' %}">Account</a>
+              <a href="{% url 'index' %}">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="{% url 'index' %}#browse">Browse Food</a>
+        <a href="{% url 'index' %}#download">Download App</a>
+        <a href="{% url 'index' %}#about">About Us</a>
+      </div>
+      <div class="icons">
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">🛍️{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}</a>
+          <div class="dropdown-menu">
+            <a href="{% url 'view_cart' %}">View Cart</a>
+            <a href="{% url 'checkout' %}">Checkout</a>
+            <a href="{% url 'order_history' %}">Order History</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">👤</a>
+          <div class="dropdown-menu">
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'account' %}">Account</a>
+            <a href="{% url 'index' %}">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="account-section1">
+      <img src="{% static 'images/salad.png' %}" alt="salad" class="salad-image" />
+      <div class="H&A">
+        <h1>Order Confirmed</h1>
+        <div><a href="{% url 'index' %}">Home</a> / <a href="{% url 'order_history' %}">Orders</a></div>
+      </div>
+      <img src="{% static 'images/pizza.png' %}" alt="pizza" class="pizza-image" />
+    </div>
+
+    <div class="account-section2">
+      <div class="border-container">
+        <div class="confirmation-box">
+          <h2>Thank you, {{ order.name }}!</h2>
+          <p>Your order <strong>#{{ order.id }}</strong> has been placed successfully.</p>
+          <p>We'll deliver to <strong>{{ order.address }}</strong>.</p>
+          <p>A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+          <h3 style="margin-top: 2rem">Order Summary</h3>
+          {% for item in items %}
+          <div class="summary-item">
+            <img src="{% static 'images/'|add:item.image %}" alt="{{ item.name }}" class="summary-item-img" />
+            <div class="summary-item-details">
+              <span class="summary-item-name">{{ item.name }}</span>
+              <span class="summary-item-qty">Qty: {{ item.qty }}</span>
+              <span class="summary-item-price">${{ item.subtotal|floatformat:2 }}</span>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="summary-total"><strong>Total: ${{ order.total }}</strong></div>
+          <a href="{% url 'browse' %}" class="filter-button" style="min-width: auto; margin-top: 2rem; display: inline-block">Order Again</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section3">
+      <div class="social-icons">
+        <a href="#"><img src="{% static 'images/facebook.jpg' %}" alt="Facebook" /></a>
+        <a href="#"><img src="{% static 'images/twitter.jpg' %}" alt="Twitter" /></a>
+        <a href="#"><img src="{% static 'images/google-plus.jpg' %}" alt="Google+" /></a>
+        <a href="#"><img src="{% static 'images/linkdin.jpg' %}" alt="LinkedIn" /></a>
+        <a href="#"><img src="{% static 'images/instagram.avif' %}" alt="Instagram" /></a>
+      </div>
+      <div class="footer-text">© 2020 MegaOne. Made With Love By Themesindustry</div>
+    </div>
+
+    <script>
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.add("active");
+      });
+      document.querySelector(".nav-close").addEventListener("click", () => {
+        document.querySelector(".nav-sidebar").classList.remove("active");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body class="login-body">
+    <div class="login-container">
+      <div class="login-card left-card">
+        <img
+          src="https://megaone.acrothemes.com/food-delivery/img/login-half-block.jpg"
+          alt="Food Delivery Image"
+        />
+      </div>
+      <div class="login-card right-card">
+        <div class="login-row-top">
+          <div class="login-logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="login-logo" />
+          </div>
+          <p style="color: brown">Lorem ipsum dolor sit amet</p>
+          <h1>Get more things, done with <br />Loggin platform.</h1>
+          <p>
+            Access to the most powerful tool in the entire design <br />and web
+            industry.
+          </p>
+          <input type="email" class="login-input-field" placeholder="Email" />
+          <input type="password" class="login-input-field" placeholder="Password" />
+          <div class="login-button-container">
+            <button class="login-button"><b>LOGIN</b></button>
+            <a href="{% url 'register' %}" class="login-register-link">Not Registered Yet?</a>
+          </div>
+        </div>
+        <div class="login-row-bottom">
+          <div class="login-link-container">
+            <div class="login-vertical-links">
+              <a href="{% url 'browse' %}" class="login-register-link">Browse Food</a>
+              <a href="{% url 'index' %}#download" class="login-register-link">Download App</a>
+            </div>
+            <a href="{% url 'index' %}#about" class="login-register-link" style="margin-top: 2rem"
+              >About Us</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
