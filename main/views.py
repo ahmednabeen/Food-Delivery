@@ -201,6 +201,25 @@ def order_confirmation(request, order_id):
     })
 
 
+def track_delivery(request):
+    address = request.GET.get('address', '')
+    orders = []
+    if address:
+        orders = Order.objects.filter(address__icontains=address).order_by('-created_at')
+        for order in orders:
+            items = json.loads(order.items)
+            for item in items:
+                img = item.get('image', '')
+                if img and not img.startswith('/media/') and not img.startswith('http'):
+                    item['image'] = ''
+            order.items_list = items
+    return render(request, 'track-delivery.html', {
+        'orders': orders,
+        'address': address,
+        'cart_count': cart_count(request),
+    })
+
+
 def order_history(request):
     orders = Order.objects.all().order_by('-created_at')
     for order in orders:

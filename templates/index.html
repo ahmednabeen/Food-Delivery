@@ -109,16 +109,16 @@
       </div>
       <div class="row2">
         <img src="{% static 'images/burgar.png' %}" alt="burger" class="burger-image" />
-        <div class="bar">
+        <form class="bar" method="GET" action="{% url 'track_delivery' %}">
           <div class="address">
             <span role="img" aria-label="location"></span>
-            <input type="text" placeholder="Your Address" />
+            <input type="text" name="address" placeholder="Your Address" />
           </div>
-          <a href="{% url 'browse' %}" class="button">
+          <button type="submit" class="button">
             <span role="img" aria-label="check">🔍</span>
             <span>CHECK FOOD DELIVERY</span>
-          </a>
-        </div>
+          </button>
+        </form>
       </div>
     </section>
     <!-- SECTION - 2  -->
