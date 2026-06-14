@@ -21,9 +21,15 @@ def cart_count(request):
 
 def index(request):
     top_foods = Food.objects.all().order_by('-rating')[:6]
+    total_orders = Order.objects.count()
+    total_foods = Food.objects.count()
+    happy_customers = Order.objects.values('name').distinct().count()
     return render(request, 'index.html', {
         'cart_count': cart_count(request),
         'top_foods': top_foods,
+        'total_orders': total_orders,
+        'total_foods': total_foods,
+        'happy_customers': happy_customers,
     })
 
 

@@ -58,7 +58,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 3rem;
   z-index: 1000;
 }
 
@@ -1612,7 +1612,7 @@ body {
 /* Tablet (768px to 1199px) - Index Page */
 @media screen and (max-width: 1199px) {
   .navbar {
-    padding: 0 1.5rem;
+    padding: 0 3rem;
   }
 
   .nav-links {
@@ -1965,7 +1965,7 @@ body {
   }
 
   .five-section-5 {
-    padding: 0 1rem;
+  padding: 0 3rem;
     height: auto;
   }
 
@@ -2151,7 +2151,7 @@ body {
 @media (min-width: 601px) and (max-width: 1024px) {
   .navbar {
     height: 4.5rem;
-    padding: 0 1.5rem;
+    padding: 0 3rem;
     flex-wrap: wrap;
   }
 
