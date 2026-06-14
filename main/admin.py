@@ -18,16 +18,6 @@ class FoodAdmin(admin.ModelAdmin):
         }),
     )
 
-
-from .models import Order as OrderModel
-
-@admin.register(OrderModel)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'address', 'status', 'total', 'created_at')
-    list_filter = ('status', 'created_at')
-    search_fields = ('name', 'address', 'phone', 'email')
-    list_editable = ('status',)
-
     def image_preview(self, obj):
         if obj.image:
             return format_html('<img src="{}" width="50" height="50" style="object-fit:cover;" />', obj.image.url)
@@ -37,6 +27,16 @@ class OrderAdmin(admin.ModelAdmin):
     def star_display(self, obj):
         return obj.star_rating()
     star_display.short_description = 'Rating'
+
+
+from .models import Order as OrderModel
+
+@admin.register(OrderModel)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'address', 'status', 'total', 'created_at')
+    list_filter = ('status', 'created_at')
+    search_fields = ('name', 'address', 'phone', 'email')
+    list_editable = ('status',)
 
 
 @admin.register(BlogPost)
