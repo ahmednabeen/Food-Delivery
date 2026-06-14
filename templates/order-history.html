@@ -93,7 +93,7 @@
               <div class="order-items">
                 {% for item in order.items_list %}
                 <div class="order-item">
-                  <img src="{% static 'images/'|add:item.image %}" alt="{{ item.name }}" class="order-item-img" />
+                  <img src="{% if item.image %}{{ item.image }}{% else %}{% static 'images/frio.png' %}{% endif %}" alt="{{ item.name }}" class="order-item-img" />
                   <span>{{ item.name }} x{{ item.qty }}</span>
                   <span>${{ item.subtotal|floatformat:2 }}</span>
                 </div>

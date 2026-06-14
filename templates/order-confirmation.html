@@ -88,7 +88,7 @@
           <h3 style="margin-top: 2rem">Order Summary</h3>
           {% for item in items %}
           <div class="summary-item">
-            <img src="{% static 'images/'|add:item.image %}" alt="{{ item.name }}" class="summary-item-img" />
+            <img src="{% if item.image %}{{ item.image }}{% else %}{% static 'images/frio.png' %}{% endif %}" alt="{{ item.name }}" class="summary-item-img" />
             <div class="summary-item-details">
               <span class="summary-item-name">{{ item.name }}</span>
               <span class="summary-item-qty">Qty: {{ item.qty }}</span>

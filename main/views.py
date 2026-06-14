@@ -2,65 +2,8 @@ import json
 from decimal import Decimal
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Order
-
-FOOD_DATA = {
-    'eat-frio': {
-        'name': 'Eat Frio', 'image': 'frio.png', 'time': '25 mins',
-        'rating': '★★★★☆', 'price': 12.99, 'category': 'Italian',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend.',
-    },
-    'turkish-cuisine': {
-        'name': 'Turkish Cuisine', 'image': 'cousine.png', 'time': '50 mins',
-        'rating': '★★★★☆', 'price': 18.99, 'category': 'Turkish',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitudin.',
-    },
-    'pizzario': {
-        'name': 'Pizzario', 'image': 'pizzario.png', 'time': '45 mins',
-        'rating': '★★★★☆', 'price': 15.99, 'category': 'Italian',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend.',
-    },
-    'sushi-delight': {
-        'name': 'Sushi Delight', 'image': 'frio.png', 'time': '30 mins',
-        'rating': '★★★★☆', 'price': 22.99, 'category': 'Japanese',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'burger-haven': {
-        'name': 'Burger Haven', 'image': 'cousine.png', 'time': '20 mins',
-        'rating': '★★★★☆', 'price': 11.99, 'category': 'American',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'pasta-palace': {
-        'name': 'Pasta Palace', 'image': 'pizza.png', 'time': '40 mins',
-        'rating': '★★★★☆', 'price': 14.99, 'category': 'Italian',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'salad-fresh': {
-        'name': 'Salad Fresh', 'image': 'frio.png', 'time': '25 mins',
-        'rating': '★★★★☆', 'price': 9.99, 'category': 'Healthy',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'steak-house': {
-        'name': 'Steak House', 'image': 'cousine.png', 'time': '50 mins',
-        'rating': '★★★★☆', 'price': 29.99, 'category': 'American',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'taco-fiesta': {
-        'name': 'Taco Fiesta', 'image': 'pizza.png', 'time': '35 mins',
-        'rating': '★★★★☆', 'price': 10.99, 'category': 'Mexican',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'ramen-bowl': {
-        'name': 'Ramen Bowl', 'image': 'frio.png', 'time': '30 mins',
-        'rating': '★★★★☆', 'price': 13.99, 'category': 'Japanese',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-    'curry-delight': {
-        'name': 'Curry Delight', 'image': 'cousine.png', 'time': '45 mins',
-        'rating': '★★★★☆', 'price': 16.99, 'category': 'Indian',
-        'description': 'Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit.',
-    },
-}
+from django.core.paginator import Paginator
+from .models import Order, Food
 
 
 def get_cart(request):
@@ -77,7 +20,11 @@ def cart_count(request):
 
 
 def index(request):
-    return render(request, 'index.html', {'cart_count': cart_count(request)})
+    top_foods = Food.objects.all().order_by('-rating')[:6]
+    return render(request, 'index.html', {
+        'cart_count': cart_count(request),
+        'top_foods': top_foods,
+    })
 
 
 def account(request):
@@ -85,11 +32,48 @@ def account(request):
 
 
 def browse(request):
-    food_data = {slug: {**info, 'slug': slug} for slug, info in FOOD_DATA.items()}
-    return render(request, 'browse.html', {
+    foods = Food.objects.all()
+    categories = Food.objects.values_list('category', flat=True).distinct().order_by('category')
+
+    category = request.GET.get('category')
+
+    if category:
+        foods = foods.filter(category__iexact=category)
+
+    paginator = Paginator(foods, 12)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    food_list = [{
+        'slug': f.slug,
+        'name': f.name,
+        'image_url': f.image.url if f.image else '',
+        'time': f.time,
+        'rating': f.rating,
+        'star_rating': f.star_rating(),
+        'price': float(f.price),
+        'category': f.category,
+        'description': f.description[:50] + '...' if len(f.description) > 50 else f.description,
+    } for f in foods]
+
+    query_params = request.GET.copy()
+    query_params.pop('page', None)
+    query_string = query_params.urlencode()
+
+    current_path = request.get_full_path()
+
+    ctx = {
         'cart_count': cart_count(request),
-        'food_data_json': json.dumps(food_data, default=str),
-    })
+        'foods': page_obj,
+        'page_obj': page_obj,
+        'food_data_json': json.dumps(food_list),
+        'filter_category': category or '',
+        'categories': categories,
+        'query_string': query_string,
+        'current_path': current_path,
+    }
+
+    return render(request, 'browse.html', ctx)
 
 
 def login(request):
@@ -101,27 +85,22 @@ def register(request):
 
 
 def food_detail(request, slug):
-    food = FOOD_DATA.get(slug)
-    if not food:
-        from django.http import Http404
-        raise Http404("Food not found")
+    food = get_object_or_404(Food, slug=slug)
+    next_url = request.GET.get('next', '')
     return render(request, 'food-detail.html', {
         'food': food, 'slug': slug,
-        'food_image': 'images/' + food['image'],
         'cart_count': cart_count(request),
+        'next_url': next_url,
     })
 
 
 def add_to_cart(request, slug):
-    food = FOOD_DATA.get(slug)
-    if not food:
-        from django.http import Http404
-        raise Http404("Food not found")
+    food = get_object_or_404(Food, slug=slug)
     cart = get_cart(request)
     if slug in cart:
         cart[slug]['qty'] += 1
     else:
-        cart[slug] = {'qty': 1, 'name': food['name'], 'price': float(food['price']), 'image': food['image']}
+        cart[slug] = {'qty': 1, 'name': food.name, 'price': float(food.price), 'image': food.image.url if food.image else ''}
     save_cart(request, cart)
     next_url = request.GET.get('next', 'view_cart')
     return redirect(next_url)
@@ -134,13 +113,16 @@ def view_cart(request):
     for slug, data in cart.items():
         subtotal = Decimal(str(data['price'])) * data['qty']
         total += subtotal
+        img = data.get('image', '')
+        if img and not img.startswith('/media/') and not img.startswith('http'):
+            img = ''
         items.append({
             'slug': slug,
             'name': data['name'],
             'price': data['price'],
             'qty': data['qty'],
             'subtotal': float(subtotal),
-            'image': data['image'],
+            'image': img,
         })
     return render(request, 'view-cart.html', {
         'items': items,
@@ -208,7 +190,10 @@ def order_confirmation(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     items = json.loads(order.items)
     for item in items:
-        item.setdefault('image', 'frio.png')
+        img = item.get('image', '')
+        if img and not img.startswith('/media/') and not img.startswith('http'):
+            item['image'] = ''
+
     return render(request, 'order-confirmation.html', {
         'order': order,
         'items': items,
@@ -221,7 +206,10 @@ def order_history(request):
     for order in orders:
         items = json.loads(order.items)
         for item in items:
-            item.setdefault('image', 'frio.png')
+            img = item.get('image', '')
+            if img and not img.startswith('/media/') and not img.startswith('http'):
+                item['image'] = ''
+
         order.items_list = items
     return render(request, 'order-history.html', {
         'orders': orders,

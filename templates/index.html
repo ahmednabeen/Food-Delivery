@@ -147,58 +147,22 @@
         </span>
       </div>
 
-      <div class="two-div-second">
-  <div class="card-container">
-    <!-- First row -->
-    <div class="card">
-      <img src="{% static 'images/mega.png' %}" alt="Mega Restaurant" />
-      <div class="card-content">
-        <h3><a href="{% url 'browse' %}">Mega Restaurant</a></h3>
-        <p>★★★★★</p>
+      <div class="more-food" style="background: none; padding-top: 0;">
+  <div class="food-container" style="grid-template-columns: repeat(3, 1fr);">
+    {% for food in top_foods %}
+    <div class="food-item">
+      <a href="{% url 'food_detail' slug=food.slug %}">
+        <img src="{% if food.image %}{{ food.image.url }}{% else %}{% static 'images/frio.png' %}{% endif %}" alt="{{ food.name }}" />
+      </a>
+      <div class="food-details">
+        <span class="delivery-time">{{ food.time }}</span>
+        <h3><a href="{% url 'food_detail' slug=food.slug %}">{{ food.name }}</a></h3>
+        <p>{{ food.description|truncatewords:10 }}</p>
+        <div class="rating">{{ food.star_rating }}</div>
+        <a href="{% url 'add_to_cart' slug=food.slug %}" class="cart-add-btn">ADD TO CART</a>
       </div>
-      <p class="description">Curabitur mollis bibendum luctus..</p>
     </div>
-    <div class="card">
-      <img src="{% static 'images/fastfood.png' %}" alt="Fast Food" />
-      <div class="card-content">
-        <h3><a href="{% url 'browse' %}">The Fast Food</a></h3>
-        <p>★★★★★</p>
-      </div>
-      <p class="description">Curabitur mollis bibendum luctus..</p>
-    </div>
-    <div class="card">
-      <img src="{% static 'images/green.png' %}" alt="Green Bakery" />
-      <div class="card-content">
-        <h3><a href="{% url 'browse' %}">Green Bakery</a></h3>
-        <p>★★★★★</p>
-      </div>
-      <p class="description">Curabitur mollis bibendum luctus..</p>
-    </div>
-    <!-- Second row -->
-    <div class="card">
-      <img src="{% static 'images/frio.png' %}" alt="Frio" />
-      <div class="card-content">
-        <h3><a href="{% url 'browse' %}">Eat Frio</a></h3>
-        <p>★★★★★</p>
-      </div>
-      <p class="description">Curabitur mollis bibendum luctus..</p>
-    </div>
-    <div class="card">
-      <img src="{% static 'images/cousine.png' %}" alt="Turkish Cousine" />
-      <div class="card-content">
-        <h3><a href="{% url 'browse' %}">Turkish Cousine</a></h3>
-        <p>★★★★★</p>
-      </div>
-      <p class="description">Curabitur mollis bibendum luctus..</p>
-    </div>
-    <div class="card">
-      <img src="{% static 'images/pizzario.png' %}" alt="Pizzario" />
-      <div class="card-content">
-        <h3><a href="{% url 'browse' %}">Pizzario</a></h3>
-        <p>★★★★★</p>
-      </div>
-      <p class="description">Curabitur mollis bibendum luctus..</p>
-    </div>
+    {% endfor %}
   </div>
 </div>
 <div class="two-div-third">

@@ -95,7 +95,7 @@
             {% for item in items %}
             <tr>
               <td class="cart-item-info">
-                <img src="{% static 'images/'|add:item.image %}" alt="{{ item.name }}" class="cart-item-img" />
+                <img src="{% if item.image %}{{ item.image }}{% else %}{% static 'images/frio.png' %}{% endif %}" alt="{{ item.name }}" class="cart-item-img" />
                 <span>{{ item.name }}</span>
               </td>
               <td>${{ item.price }}</td>

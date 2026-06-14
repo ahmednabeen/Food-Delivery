@@ -81,17 +81,17 @@
     <div class="detail-section">
       <div class="detail-card">
         <div class="detail-image">
-          <img src="{% static food_image %}" alt="{{ food.name }}" />
+          <img src="{% if food.image %}{{ food.image.url }}{% else %}{% static 'images/frio.png' %}{% endif %}" alt="{{ food.name }}" />
         </div>
         <div class="detail-info">
           <span class="detail-badge">{{ food.time }}</span>
           <h1>{{ food.name }}</h1>
-          <div class="detail-rating">{{ food.rating }}</div>
+          <div class="detail-rating">{{ food.star_rating }}</div>
           <p class="detail-category">{{ food.category }}</p>
           <p class="detail-price">${{ food.price }}</p>
           <p class="detail-desc">{{ food.description }}</p>
           <div class="detail-actions">
-            <a href="{% url 'add_to_cart' slug=slug %}" class="third-div-btn" style="padding: 0.8rem 3rem; font-size: 1rem">ADD TO CART</a>
+            <a href="{% url 'add_to_cart' slug=slug %}?next={% if next_url %}{{ next_url }}{% else %}view_cart{% endif %}" class="third-div-btn" style="padding: 0.8rem 3rem; font-size: 1rem">ADD TO CART</a>
             <a href="{% url 'add_to_cart' slug=slug %}?next=checkout" class="filter-button" style="min-width: auto; padding: 0.8rem 3rem; font-size: 1rem">ORDER NOW</a>
           </div>
         </div>
